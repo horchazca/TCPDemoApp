@@ -1,0 +1,196 @@
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#include <math.h>
+
+//Función para procesar la cadena de texto recibida
+void ProcesaCad(char data[200], double vars[4])
+{
+	// Declaramos las variables
+    int pos = 0;
+    int pc = 0;
+    int i = 0;
+	int cnt = 0;
+
+    char cad01[50] = "";
+    char cad02[50] = "";
+    char cad03[50] = "";
+    char cad04[50] = "";
+    char cadN01[50] = "";
+    char cadN02[50] = "";
+    char cadN03[50] = "";
+    char cadN04[50] = "";
+
+	double xf;
+	double yf;
+	double xaf;
+	double yaf;
+
+	int numerales[50];
+	int mult = 1;
+    
+    // Recorremos la cadena para sacar cada uno de los miembros
+    for(i = 0;  i < 200 && data[i] != '\0'; i++)
+    {
+        //Comenzamos checando la posicion
+        if(pos == 0)
+        {
+            if(data[i] == '&')
+            {
+                cad01[pc] = '\0';
+                pos = 1;
+                pc = 0;
+            }
+            else
+            {
+                cad01[pc] = data[i];
+                pc++;
+            }
+        }
+        else if(pos == 1)
+        {
+            if(data[i] == '&')
+            {
+                cad02[pc] = '\0';
+                pos = 2;
+                pc = 0;
+            }
+            else
+            {
+                cad02[pc] = data[i];
+                pc++;
+            }
+        }
+        else if(pos == 2)
+        {
+            if(data[i] == '&')
+            {
+                cad03[pc] = '\0';
+                pos = 3;
+                pc = 0;
+            }
+            else
+            {
+                cad03[pc] = data[i];
+                pc++;
+            }
+            
+        }
+        else if(pos == 3)
+        {
+            if(data[i] == '&')
+            {
+                cad04[pc] = '\0';
+                pos = 4;
+                pc = 0;
+            }
+            else
+            {
+                cad04[pc] = data[i];
+                pc++;
+            }
+        }
+        else
+        {
+            // ERROR
+			break;
+        }
+    }
+
+	// Hasta es punto tenemos las cadenas formadas
+	// Ahora, le quitamos las primeras letras
+
+	// Ahora, identificamos a qué miembro corresponde cada una:
+	// Verificamos la cadena 1
+	xf = 0;
+	yf = 0;
+	xaf = 0;
+	yaf = 0;
+
+	if(cad01[0] == 'x')
+	{
+
+	}
+
+	if(cad01[1] == 'f')
+	{
+
+	}
+
+	if(cad01[0] == 'x' && cad01[1] == 'f')
+	{
+		// Este es el caso ideal...
+		// Cuando esto sucede, ahora sacamos los números
+		for(i = 2; cad01[i] != '\0' && i < 50; i++)
+		{
+			numerales[i - 2] = cad01[i] - 48;
+		}
+
+		//Ahora, ya que se tienen los numerales, los sumamos...
+		for(i = i - 3, mult = 1; 0 <= i; i--, mult = mult * 10)
+		{
+			xf = xf + (numerales[i]*mult);
+		}
+	}
+
+
+/*
+
+	for(cnt = 0; cnt < 4; 
+
+
+	pos = 0;
+	pc = 0;
+	i = 0;
+
+	for(i = 2, pc = 0; i < 50 && cad01[i] != '\0'; i++, pc++)
+	{
+		cadN01[pc] = cad01[i];
+	}
+	cadN01[pc] = '\0';
+
+	for(i = 2, pc = 0; i < 50 && cad02[i] != '\0'; i++, pc++)
+	{
+		cadN02[pc] = cad02[i];
+	}
+	cadN02[pc] = '\0';
+
+	for(i = 3, pc = 0; i < 50 && cad03[i] != '\0'; i++, pc++)
+	{
+		cadN03[pc] = cad03[i];
+	}
+	cadN03[pc] = '\0';
+
+	for(i = 3, pc = 0; i < 50 && cad04[i] != '\0'; i++, pc++)
+	{
+		cadN04[pc] = cad04[i];
+	}
+	cadN04[pc] = '\0';
+
+	for(i = 0; i < 50; i++)
+	{
+		printf("Caracter: |%c|\n", cadN01[i]);
+	}
+
+	printf("Cadena 1: %s\n", cadN01);
+	printf("Cadena 2: %s\n", cadN02);
+	printf("Cadena 3: %s\n", cadN03);
+	printf("Cadena 4: %s\n", cadN04);
+
+	xf = strtod(cadN01, NULL);
+	yf = strtod(cadN02, NULL);
+	xaf = strtod(cadN03, NULL);
+	yaf = strtod(cadN04, NULL);*/
+
+	printf("Los valores son: %f, %f, %f, %f\n", xf, yf, xaf, yaf);
+}
+
+int main()
+{
+	double vars[4];
+	ProcesaCad("xf12562&yf51254&xa45145&ya38975", vars);
+
+	system("pause");
+
+	return 0;
+}
