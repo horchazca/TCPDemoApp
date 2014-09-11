@@ -1,3 +1,22 @@
+# Ignorando los archivos de configuración propios de los usuarios
+
+
+*.user
+
+desktop.ini
+
+Thumbs.db
+
+
+*.suo
+*.ncb
+
+
+#Ignorando la carpeta de construcción de Visual Studio
+Cadenas/Cadenas/Debug/**/*
+Cadenas/Debug/**/*
+
+
 # Object files
 *.o
 *.ko
